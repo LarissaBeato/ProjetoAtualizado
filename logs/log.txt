@@ -1,0 +1,28 @@
+
+Tentativa de login falhada:
+Data: 03/12/24
+Usuário: 
+Senha: dfgdfgd
+IP: 127.0.0.1
+
+Tentativa de login falhada:
+Data: 03/12/24
+Usuário: 
+Senha: dfgdfgd
+IP: 127.0.0.1
+
+Tentativa de login falhada:
+Data: 03/12/24
+Senha: dfgdfgd
+IP: 127.0.0.1
+
+Tentativa de login falhada:
+Data: 03/12/24
+Senha: 123
+IP: 127.0.0.1
+
+Tentativa de login falhada:
+Data: 03/12/24
+Email: Julia@gmail.com
+Senha: 123
+IP: 127.0.0.1
