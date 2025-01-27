@@ -1,0 +1,78 @@
+CREATE TABLE Cadastro (
+    id_user SERIAL PRIMARY KEY,
+    nomeCompleto VARCHAR(255) NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    CPF VARCHAR(14) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+TABLE Cadastro
+DELETE FROM Cadastro WHERE id_user = 11;
+
+INSERT INTO Cadastro (nomeCompleto, telefone, CPF, email, senha)
+VALUES ('Gabriel Moreira', '46991057504', '09087621211', 'gabriel@gmail.com', '123');
+
+CREATE TABLE Perfil (
+    id_perfil serial PRIMARY KEY,
+    descricao VARCHAR(255),
+    RedesSociais VARCHAR(255),
+    cursosExperiencia VARCHAR(255),
+    ativo BOOLEAN DEFAULT TRUE,
+    user_idfk int, 
+    FOREIGN KEY (user_idfk) REFERENCES Cadastro(id_user),
+    cursos_pessoais_idfk int, 
+    FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
+    vagas_idfk int, 
+    FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas),
+	fotoPerfil varchar(225)
+);
+
+DROP TABLE Perfil
+
+INSERT INTO Perfil (descricao, RedesSociais, cursosExperiencia, ativo, user_idfk)
+VALUES ('Estudante de tecnologia', 'gabriel@gmail.com', 'Técnico Desenvolvimento de Sistemas', true, 2);
+
+SELECT C.nomeCompleto, P.descricao, P.cursosExperiencia, C.email 
+FROM Perfil P
+INNER JOIN Cadastro C ON P.user_idfk = C.id_user;
+
+
+table perfil
+
+CREATE TABLE Cursos (
+    id_Cursos SERIAL PRIMARY KEY,
+    Nome_Curso VARCHAR(255) NOT NULL,
+    Duracao INT NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    matrizCurricular TEXT
+);
+
+
+
+CREATE TABLE Vagas (
+    id_vagas SERIAL PRIMARY KEY,
+    area VARCHAR(255) NOT NULL,
+    empresa VARCHAR(255) NOT NULL,
+    cargaHoraria INT NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE CursosPessoais (
+    id_CursosPessoais SERIAL PRIMARY KEY,
+    NomeCursoPessoal VARCHAR(255) NOT NULL,
+    duracaoCursoPessoal INT NOT NULL,
+    matrizCurricularPessoal TEXT,
+    precoCursoPessoal DECIMAL(10, 2) NOT NULL
+);
+ALTER TABLE CursosPessoais ADD COLUMN imagem varchar(255);
+ALTER TABLE Perfil ADD COLUMN curriculo_url varchar(255);
+ALTER TABLE CursosPessoais ADD COLUMN idfk_user int;
+ALTER TABLE CursosPessoais ADD CONSTRAINT idfk_user FOREIGN KEY (idfk_user) references Cadastro (id_user);
+ALTER TABLE CursosPessoais DROP COLUMN idfk_perfil;
+ALTER TABLE CursosPessoais ADD COLUMN andamento BOOL;
+
+UPDATE CursosPessoais SET idfk_user = 2;
+UPDATE CursosPessoais SET imagem = 'CSSprojeto/img/images.jpg' where id_cursospessoais = 2;
+UPDATE CursosPessoais SET andamento = FALSE WHERE id_cursospessoais = 2;
+SELECT * FROM CursosPessoais
+INSERT INTO CursosPessoais (NomeCursoPessoal, duracaoCursoPessoal, matrizCurricularPessoal, precoCursoPessoal) VALUES ('Tecnico Elétrica 2', 200, 'Matematica', 0.00); 
