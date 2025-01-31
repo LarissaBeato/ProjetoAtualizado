@@ -24,7 +24,8 @@ CREATE TABLE Perfil (
     FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
     vagas_idfk int, 
     FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas),
-	fotoPerfil varchar(225)
+	fotoPerfil varchar(225),
+	curriculo_url varchar(255)
 );
 
 DROP TABLE Perfil
@@ -62,14 +63,14 @@ CREATE TABLE CursosPessoais (
     NomeCursoPessoal VARCHAR(255) NOT NULL,
     duracaoCursoPessoal INT NOT NULL,
     matrizCurricularPessoal TEXT,
-    precoCursoPessoal DECIMAL(10, 2) NOT NULL
+    precoCursoPessoal DECIMAL(10, 2) NOT NULL,
+	imagem varchar(255),
+	idfk_user int,
+	 FOREIGN KEY (idfk_user) REFERENCES Cadastro (id_user),
+	andamento BOOL
 );
-ALTER TABLE CursosPessoais ADD COLUMN imagem varchar(255);
-ALTER TABLE Perfil ADD COLUMN curriculo_url varchar(255);
-ALTER TABLE CursosPessoais ADD COLUMN idfk_user int;
-ALTER TABLE CursosPessoais ADD CONSTRAINT idfk_user FOREIGN KEY (idfk_user) references Cadastro (id_user);
-ALTER TABLE CursosPessoais DROP COLUMN idfk_perfil;
-ALTER TABLE CursosPessoais ADD COLUMN andamento BOOL;
+
+
 
 UPDATE CursosPessoais SET idfk_user = 2;
 UPDATE CursosPessoais SET imagem = 'CSSprojeto/img/images.jpg' where id_cursospessoais = 2;
